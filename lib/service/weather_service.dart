@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:weather/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,7 +9,13 @@ class WeatherService {
 
   WeatherService({required this.apiKey});
 
-  // Future<Weather> getWeather(String cityName) async {
-  //   final response = await http.get(Uri.parse("$BASE_URL?q=$cityName&appid=$apiKey&units=metric"));
-  // }
+  Future<Weather> getWeather(String cityName) async {
+    final response = await http
+        .get(Uri.parse("$BASE_URL?q=$cityName&appid=$apiKey&units=metric"));
+    if (response.statusCode == 200) {
+      return Weather.fromJson(jsonDecode(response.body));
+    }else{
+      throw Exception("Failed to load weather data");
+    }
+  }
 }
