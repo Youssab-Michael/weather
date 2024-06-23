@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather/models/weather_model.dart';
 import 'package:weather/service/weather_service.dart';
 
@@ -42,6 +43,7 @@ class _WeatherPageState extends State<WeatherPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_weather?.cityName??"loading city..."),
+            Lottie.asset("assets/thunder.json"),
             Text("${_weather?.temperature.round()} °C"),
           ],
         ),
